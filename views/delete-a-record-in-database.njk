@@ -24,16 +24,17 @@
   <main>
     <section style="text-align: center;">
       <h2>Delete a Record in the Database</h2>
-      <form action="/delete-a-db-record" method="POST">
+      <form action="/delete/{{ user.id }}" method="POST">
         <div>
-          <select autofocus name="name" class="select-css">
-            <option selected>Select a user you’d like to delete</option>
+          <select name="name" class="select-css">
+            <option selected>Select a user to delete</option>
             {%- for entry in mongoDBArray -%}
             <option value="{{ entry.name }}">{{ entry.name }}</option>
             {%- endfor %}
           </select>
         </div>
-        <div><button type="submit">Submit</button></div>
+        <input type="hidden" name="password" value="{{ user.password }}">
+        <div><button type="submit">Delete</button></div>
       </form>
     </section>
   </main>
