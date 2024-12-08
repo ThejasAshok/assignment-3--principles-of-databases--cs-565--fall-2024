@@ -46,6 +46,28 @@ mongoClient.connect(`${dbURL}:${dbPort}`, (err, client) => {
             colors.green, dbName, colors.reset, `\n`);
     }
 });
+app.post('/update', async (req, res) => {
+  const { id, newData } = req.body;
+  try {
+      const result = await User.updateOne({ _id: id }, { $set: newData });
+      console.log(`Updated record with ID: ${id}`);
+      res.status(200).send(result);
+  } catch (error) {
+      console.error(`Error updating record: ${error}`);
+      res.status(500).send(error);
+  }
+});
+app.post('/delete', async (req, res) => {
+  const { id } = req.body;
+  try {
+      const result = await User.deleteOne({ _id: id });
+      console.log(`Deleted record with ID: ${id}`);
+      res.status(200).send(result);
+  } catch (error) {
+      console.error(`Error deleting record: ${error}`);
+      res.status(500).send(error);
+  }
+});
 
 /*
  * Configure Node to act as a web server
