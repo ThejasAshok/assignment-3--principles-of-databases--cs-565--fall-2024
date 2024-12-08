@@ -24,6 +24,7 @@
   <main>
     <section style="text-align: center;">
       <h2>Update a Record in the Database</h2>
+      <!-- Existing form for selecting a user -->
       <form action="/update-a-db-record" method="POST">
         <div>
           <select autofocus name="name" class="select-css">
@@ -35,6 +36,13 @@
         </div>
         <div><input type="password" placeholder="Enter a new password here" name="password"></div>
         <div><button type="submit">Submit</button></div>
+      </form>
+
+      <!-- Newly added form for updating user information -->
+      <form action="/update/{{ user.id }}" method="POST">
+        <input type="text" name="name" value="{{ user.name }}" />
+        <input type="password" name="password" value="{{ user.password }}" />
+        <button type="submit">Update</button>
       </form>
     </section>
   </main>
